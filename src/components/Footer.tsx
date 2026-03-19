@@ -6,7 +6,7 @@ export default function Footer() {
           {/* Company */}
           <div>
             <h3 className="text-xl font-bold text-text-light mb-4">
-              Solv<span className="text-secondary">MPire</span>
+              Solve<span className="text-secondary">MPire</span>
             </h3>
             <p className="text-[14px] leading-relaxed text-text-light/40 max-w-xs">
               Bring us a problem. We&apos;ll build the solution.
