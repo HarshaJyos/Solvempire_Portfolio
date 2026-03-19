@@ -22,18 +22,17 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
           ? "bg-bg-dark/90 backdrop-blur-xl shadow-[0_1px_20px_rgba(33,72,186,0.12)]"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="mx-auto max-w-[1280px] flex items-center justify-between px-6 lg:px-10 h-[72px]">
         {/* Logo */}
         <a href="#" className="flex items-center gap-3 group">
           <Image
             src="/logo.png"
-            alt="SolvMPire"
+            alt="SolveMPire"
             width={160}
             height={40}
             className="h-9 w-auto object-contain"
@@ -70,28 +69,24 @@ export default function Navbar() {
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-6 h-[2px] bg-text-light transition-all duration-300 ${
-              mobileOpen ? "rotate-45 translate-y-[7px]" : ""
-            }`}
+            className={`block w-6 h-[2px] bg-text-light transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-[7px]" : ""
+              }`}
           />
           <span
-            className={`block w-6 h-[2px] bg-text-light transition-all duration-300 ${
-              mobileOpen ? "opacity-0" : ""
-            }`}
+            className={`block w-6 h-[2px] bg-text-light transition-all duration-300 ${mobileOpen ? "opacity-0" : ""
+              }`}
           />
           <span
-            className={`block w-6 h-[2px] bg-text-light transition-all duration-300 ${
-              mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""
-            }`}
+            className={`block w-6 h-[2px] bg-text-light transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""
+              }`}
           />
         </button>
       </div>
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 bg-bg-dark/95 backdrop-blur-xl ${
-          mobileOpen ? "max-h-[400px] border-t border-white/10" : "max-h-0"
-        }`}
+        className={`md:hidden overflow-hidden transition-all duration-300 bg-bg-dark/95 backdrop-blur-xl ${mobileOpen ? "max-h-[400px] border-t border-white/10" : "max-h-0"
+          }`}
       >
         <ul className="flex flex-col px-6 py-4 gap-1">
           {navLinks.map((link) => (

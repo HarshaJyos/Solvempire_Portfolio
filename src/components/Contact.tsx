@@ -35,11 +35,10 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left — Info */}
           <div
-            className={`transition-all duration-700 ${
-              inView
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-10"
-            }`}
+            className={`transition-all duration-700 ${inView
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 -translate-x-10"
+              }`}
           >
             <span className="inline-block text-[13px] font-semibold text-accent uppercase tracking-widest mb-3">
               Let&apos;s Talk
@@ -58,7 +57,7 @@ export default function Contact() {
             {/* Contact details */}
             <div className="space-y-5">
               <a
-                href="mailto:founder@solvmpire.com"
+                href="mailto:founder@solvempire.com"
                 className="flex items-center gap-4 group"
               >
                 <div className="w-11 h-11 rounded-xl bg-primary/10 text-secondary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
@@ -81,7 +80,7 @@ export default function Contact() {
                     Email
                   </div>
                   <div className="text-[15px] font-medium text-text-light/70 group-hover:text-secondary transition-colors">
-                    founder@solvmpire.com
+                    founder@solvempire.com
                   </div>
                 </div>
               </a>
@@ -119,11 +118,10 @@ export default function Contact() {
 
           {/* Right — Form */}
           <div
-            className={`transition-all duration-700 delay-200 ${
-              inView
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-10"
-            }`}
+            className={`transition-all duration-700 delay-200 ${inView
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 translate-x-10"
+              }`}
           >
             <form
               onSubmit={handleSubmit}

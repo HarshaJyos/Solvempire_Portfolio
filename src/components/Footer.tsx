@@ -45,10 +45,10 @@ export default function Footer() {
             <ul className="space-y-2.5">
               <li>
                 <a
-                  href="mailto:founder@solvmpire.com"
+                  href="mailto:founder@solvempire.com"
                   className="text-[14px] text-text-light/35 hover:text-secondary transition-colors duration-200"
                 >
-                  founder@solvmpire.com
+                  founder@solvempire.com
                 </a>
               </li>
               <li>
@@ -66,7 +66,7 @@ export default function Footer() {
         {/* Divider + Copyright */}
         <div className="mt-14 pt-8 border-t border-white/[0.06]">
           <p className="text-[13px] text-text-light/25 text-center">
-            &copy; {new Date().getFullYear()} SolvMPire Pvt Ltd. All rights
+            &copy; {new Date().getFullYear()} SolveMPire Pvt Ltd. All rights
             reserved.
           </p>
         </div>

@@ -23,7 +23,7 @@ export default function CtaBanner() {
   const inView = useInView(ref);
 
   return (
-    <section ref={ref} className="py-16 lg:py-20 bg-bg-dark">
+    <section ref={ref} className="py-16 lg:py-20 bg-bg-dark overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
         <div
           className={`relative overflow-hidden rounded-2xl border border-white/[0.06] bg-gradient-to-r from-tertiary/50 to-bg-dark px-8 py-12 lg:px-16 lg:py-14 flex flex-col lg:flex-row items-center justify-between gap-6 transition-all duration-700 ${

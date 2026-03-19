@@ -26,9 +26,8 @@ export default function Founder() {
     <section id="founder" ref={ref} className="py-24 lg:py-32 bg-bg-dark">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
         <div
-          className={`max-w-3xl mx-auto transition-all duration-700 ${
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`max-w-3xl mx-auto transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           {/* Section label */}
           <span className="inline-block text-[13px] font-semibold text-accent uppercase tracking-widest mb-6">
@@ -54,7 +53,7 @@ export default function Founder() {
               </svg>
 
               <p className="text-[18px] sm:text-[20px] lg:text-[22px] text-text-light/80 leading-[1.8] mb-8">
-                We started SolvMPire because we were tired of watching real
+                We started SolveMPire because we were tired of watching real
                 problems go unsolved. Not because there weren&apos;t solutions
                 — but because no one built them properly.
               </p>

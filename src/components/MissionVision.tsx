@@ -30,9 +30,8 @@ export default function Manifesto() {
 
       <div className="relative z-10 mx-auto max-w-[900px] px-6 lg:px-10 text-center">
         <div
-          className={`transition-all duration-700 ${
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           {/* Label */}
           <span className="inline-block text-[13px] font-semibold text-quaternary uppercase tracking-widest mb-6">
@@ -46,13 +45,12 @@ export default function Manifesto() {
         </div>
 
         <div
-          className={`transition-all duration-700 delay-200 ${
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`transition-all duration-700 delay-200 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           <p className="text-[17px] sm:text-[19px] text-text-light/60 leading-[1.85] mb-8 max-w-[750px] mx-auto">
             Most people wait for the right time. The right team. The right
-            funding. SolvMPire was built by someone who stopped waiting.
+            funding. SolveMPire was built by someone who stopped waiting.
           </p>
           <p className="text-[17px] sm:text-[19px] text-text-light/60 leading-[1.85] max-w-[750px] mx-auto">
             We exist for the ones who have a real problem and need a team that
@@ -63,9 +61,8 @@ export default function Manifesto() {
 
         {/* Accent line */}
         <div
-          className={`mt-12 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-accent to-primary transition-all duration-700 delay-500 ${
-            inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
-          }`}
+          className={`mt-12 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-accent to-primary transition-all duration-700 delay-500 ${inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+            }`}
         />
       </div>
     </section>
