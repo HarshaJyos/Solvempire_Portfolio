@@ -44,6 +44,88 @@ body {
   border-radius: 3px;
 }
 
+.PlaygroundEditorTheme__hr:after {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  height: 1px !important;
+}
+
+/* Lexical Toolbar & UI Overrides */
+.dark-shell .toolbar {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 8px !important;
+}
+
+.dark-shell .toolbar-item {
+  color: rgba(244, 247, 255, 0.6) !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+.dark-shell .toolbar-item:hover:not([disabled]) {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #F4F7FF !important;
+}
+
+.dark-shell .toolbar-item.active {
+  background-color: rgba(33, 72, 186, 0.2) !important;
+  color: #5A7BE0 !important;
+}
+
+.dark-shell .divider {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  width: 1px !important;
+  margin: 0 8px !important;
+}
+
+.dropdown {
+  background-color: #1E293B !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+.dropdown .item {
+  background-color: transparent !important;
+  color: rgba(244, 247, 255, 0.6) !important;
+  padding: 10px 16px !important;
+  transition: all 0.2s ease !important;
+}
+
+.dropdown .item:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #F4F7FF !important;
+}
+
+.dropdown .item.dropdown-item-active {
+  background-color: rgba(33, 72, 186, 0.15) !important;
+  color: #5A7BE0 !important;
+}
+
+.dropdown .item .text {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+.dropdown .item .icon {
+  filter: invert(1) brightness(2) !important;
+  opacity: 0.6 !important;
+}
+
+/* Modal Overrides */
+.Modal__overlay {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.Modal__modal {
+  background-color: #1E293B !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+}
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
 }

@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   const seo = post.seo || {};
-  const title = seo.metaTitle || post.title;
+  const title = `${seo.metaTitle || post.title} | SolveMPire Journal`;
   const description = seo.metaDescription || post.excerpt;
   const ogImage = seo.ogImage || post.coverImage;
 
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     keywords: seo.keywords || post.tags || [],
     robots: seo.noIndex ? 'noindex, nofollow' : 'index, follow',
     alternates: {
-      canonical: seo.canonicalUrl || `https://coreblock.in/blog/${post.slug}`,
+      canonical: seo.canonicalUrl || `https://solvempire.com/blog/${post.slug}`,
     },
     openGraph: {
       title,
@@ -47,6 +47,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       publishedTime: new Date(post.publishedAt || post.createdAt).toISOString(),
       authors: [post.author || 'Hanish Jyosyabhatla'],
       images: ogImage ? [{ url: ogImage }] : undefined,
+      siteName: 'SolveMPire',
     },
     twitter: {
       card: 'summary_large_image',
@@ -76,12 +77,12 @@ export default async function BlogDetailPage({ params }: { params: { slug: strin
       "author": {
         "@type": "Person",
         "name": post.author,
-        "url": "https://coreblock.in"
+        "url": "https://solvempire.com"
       },
       "description": post.excerpt,
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `https://coreblock.in/blog/${post.slug}`
+        "@id": `https://solvempire.com/blog/${post.slug}`
       }
     };
 
@@ -94,10 +95,16 @@ export default async function BlogDetailPage({ params }: { params: { slug: strin
 
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-white pt-24 pb-20 px-4">
+      <div className="min-h-screen bg-bg-dark pt-32 pb-20 px-4">
         <div className="max-w-3xl mx-auto animate-pulse">
-          <div className="h-10 bg-zinc-100 rounded-md w-3/4 mb-6"></div>
-          <div className="aspect-[2/1] bg-zinc-100 rounded-xl"></div>
+          <div className="h-4 w-32 bg-white/5 rounded-full mb-8"></div>
+          <div className="h-12 bg-white/5 rounded-xl w-3/4 mb-10"></div>
+          <div className="aspect-[2/1] bg-white/5 rounded-3xl mb-12"></div>
+          <div className="space-y-4">
+             <div className="h-4 bg-white/5 rounded w-full"></div>
+             <div className="h-4 bg-white/5 rounded w-5/6"></div>
+             <div className="h-4 bg-white/5 rounded w-full"></div>
+          </div>
         </div>
       </div>
     }>

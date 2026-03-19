@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { AuthProvider } from "@/components/blog/AuthContext";
 
 export const metadata: Metadata = {
   title: "SolveMPire — Bring Us a Problem. We'll Build the Solution.",
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
     description:
       "Most companies sell services. We solve problems. Tell us what's broken.",
     type: "website",
+    siteName: "SolveMPire",
   },
 };
 
@@ -32,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -45,10 +47,14 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-inter antialiased overflow-x-hidden">
-        <Navbar />
-        <main className="overflow-x-hidden relative w-full">{children}</main>
-        <Footer />
+      <body className="font-inter antialiased bg-bg-dark text-text-light selection:bg-primary/30 selection:text-text-light">
+        <AuthProvider>
+          <Navbar />
+          <main className="relative w-full min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

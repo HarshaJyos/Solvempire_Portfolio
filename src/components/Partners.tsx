@@ -1,65 +1,46 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 const partners = [
-  { name: "FreshPod", logo: "/partners/freshpod.png" },
-  { name: "CoreBlock", logo: "/partners/coreblock.png" },
-  { name: "Aditya University", logo: "/partners/aditya-university.png" },
-  { name: "Loah", logo: "/partners/loah.svg" },
+  { name: "Google", logo: "/partners/google-cloud.png" },
+  { name: "Azure", logo: "/partners/azure.png" },
+  { name: "AWS", logo: "/partners/aws.png" },
+  { name: "Oracle", logo: "/partners/oracle.png" },
+  { name: "MongoDB", logo: "/partners/mongodb.png" },
+  { name: "NVIDIA", logo: "/partners/nvidia.png" },
+  { name: "OpenAI", logo: "/partners/openai.png" },
+  { name: "Pinecone", logo: "/partners/pinecone.png" },
+  { name: "Anthropic", logo: "/partners/anthropic.png" },
 ];
 
-function useInView(ref: React.RefObject<HTMLElement | null>) {
-  const [inView, setInView] = useState(false);
-  useEffect(() => {
-    if (!ref.current) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold: 0.2 }
-    );
-    obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, [ref]);
-  return inView;
-}
-
 export default function Partners() {
-  const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref);
-
   return (
-    <section id="partners" ref={ref} className="py-24 lg:py-32 bg-off-white">
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-        {/* Header */}
-        <div className={`max-w-2xl mx-auto text-center mb-16 transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-          <span className="inline-block text-[13px] font-semibold text-primary uppercase tracking-widest mb-3">
-            Trusted By
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-dark leading-tight">
-            Our Partners
+    <section className="py-24 bg-bg-dark border-y border-white/[0.06] overflow-hidden">
+      <div className="container mx-auto px-6 lg:px-10">
+        <div className="flex flex-col items-center mb-16 px-4">
+          <h2 className="text-[11px] font-black text-primary uppercase tracking-[0.3em] mb-4">
+            Our Ecosystem
           </h2>
+          <p className="text-2xl md:text-3xl font-bold text-text-light text-center max-w-2xl leading-tight">
+            SolveMPire works with the world’s leading technology platforms to architect your solutions.
+          </p>
         </div>
 
-        {/* Logo row - equal height, natural width */}
-        <div
-          className={`flex flex-wrap items-center justify-center gap-10 lg:gap-16 transition-all duration-700 delay-200 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
-        >
-          {partners.map((partner, i) => (
+        <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20 opacity-30 grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0">
+          {partners.map((partner) => (
             <div
               key={partner.name}
-              className="flex items-center justify-center p-4 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
-              style={{ transitionDelay: `${i * 80}ms` }}
+              className="group relative flex items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 hover:scale-110"
+              title={partner.name}
             >
-              <Image
-                src={partner.logo}
-                alt={partner.name}
-                width={200}
-                height={60}
-                className="object-contain"
-                style={{ height: "60px", width: "auto" }}
-              />
+              <div className="h-8 md:h-12 w-auto relative">
+                 <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-full w-auto object-contain opacity-50 group-hover:opacity-100 transition-opacity"
+                />
+              </div>
             </div>
           ))}
         </div>

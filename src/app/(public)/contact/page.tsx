@@ -1,51 +1,53 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | CoreBlock',
-  description: 'Get in touch with the CoreBlock team for support or business inquiries. We are here to help.',
+  title: 'Contact SolveMPire | Get in Touch',
+  description: 'Reach out to the SolveMPire team for technical inquiries, collaboration, or support. We are here to help you architect the future.',
   openGraph: {
-    title: 'Contact Us | CoreBlock',
-    description: 'Get in touch with the CoreBlock team for support or business inquiries. We are here to help.',
-    url: 'https://coreblock.in/contact',
-    siteName: 'CoreBlock',
+    title: 'Contact SolveMPire | Get in Touch',
+    description: 'Reach out to the SolveMPire team for technical inquiries, collaboration, or support. We are here to help you architect the future.',
+    url: 'https://solvempire.com/contact',
+    siteName: 'SolveMPire',
     type: 'website',
   },
 };
 
 export default function ContactPage() {
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <h1 className="text-4xl font-bold tracking-tight text-zinc-950 mb-8">Contact Us</h1>
-      
-      <div className="prose prose-zinc max-w-none text-zinc-600">
-        <p className="text-lg leading-relaxed mb-8">
-          Have a question, feedback, or need support? We&apos;d love to hear from you. 
-          Please reach out to us using the information below.
-        </p>
+    <div className="min-h-screen bg-bg-dark pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <h1 className="font-bebas text-4xl md:text-5xl text-text-light tracking-tight leading-tight mb-8 animate-slide-up">
+          Contact Us
+        </h1>
+        
+        <div className="prose prose-invert prose-zinc max-w-none text-text-light/60 animate-fade-in">
+          <p className="text-xl leading-relaxed mb-12 text-text-light/80">
+            Have a question about our engineering processes, want to collaborate on an AI project, or simply need support? 
+            We&apos;d love to hear from you. Reach out to the SolveMPire team.
+          </p>
 
-        <div className="space-y-6">
-          <div>
-            <h2 className="text-lg font-semibold text-zinc-900 mb-4">Contact Details</h2>
-            <div className="space-y-4">
-              <div>
-                <p className="text-sm font-medium text-zinc-900 mb-1">Email</p>
-                <a href="mailto:support.coreblock@gmail.com" className="text-zinc-600 hover:text-zinc-950 transition-colors">
-                  support.coreblock@gmail.com
-                </a>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-zinc-900 mb-1">Phone (India)</p>
-                <a href="tel:+919701341323" className="text-zinc-600 hover:text-zinc-950 transition-colors">
-                  +91 9701341323
-                </a>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
+            <div className="p-8 rounded-3xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl hover:bg-white/[0.05] transition-all group">
+              <h2 className="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-4">Email Inquiry</h2>
+              <a href="mailto:support.solvempire@gmail.com" className="text-xl font-bold text-text-light group-hover:text-secondary transition-colors break-all">
+                support.solvempire@gmail.com
+              </a>
+              <p className="mt-4 text-sm text-text-light/30">Official support and business inquiries.</p>
+            </div>
+
+            <div className="p-8 rounded-3xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl hover:bg-white/[0.05] transition-all group">
+              <h2 className="text-xs font-bold text-accent uppercase tracking-[0.2em] mb-4">Direct Link</h2>
+              <a href="tel:+919701341323" className="text-xl font-bold text-text-light group-hover:text-amber-500 transition-colors">
+                +91 9701341323
+              </a>
+              <p className="mt-4 text-sm text-text-light/30">Available for urgent technical consultations.</p>
             </div>
           </div>
           
-          <div className="pt-8 mt-8 border-t border-zinc-200">
-            <p className="text-sm">
-              We aim to respond to all inquiries within 24-48 business hours. Thank you for your patience 
-              and for being a part of the CoreBlock community.
+          <div className="pt-12 mt-12 border-t border-white/[0.06]">
+            <p className="text-sm font-medium text-text-light/30 leading-relaxed italic">
+              We aim to respond to all technical inquiries within 24-48 business hours. Thank you for your patience 
+              and for being a vital part of the SolveMPire ecosystem.
             </p>
           </div>
         </div>

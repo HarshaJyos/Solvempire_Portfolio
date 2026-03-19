@@ -18,38 +18,38 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import type { EditorState } from 'lexical';
 
-import PlaygroundNodes from '../package/nodes/PlaygroundNodes';
-import PlaygroundEditorTheme from '../package/themes/PlaygroundEditorTheme';
-import ContentEditable from '../package/ui/ContentEditable';
-import ToolbarPlugin from '../package/plugins/ToolbarPlugin';
-import CodeHighlightPlugin from '../package/plugins/CodeHighlightPlugin';
-import LinkPlugin from '../package/plugins/LinkPlugin';
-import FloatingLinkEditorPlugin from '../package/plugins/FloatingLinkEditorPlugin';
-import FloatingTextFormatToolbarPlugin from '../package/plugins/FloatingTextFormatToolbarPlugin';
-import ImagesPlugin from '../package/plugins/ImagesPlugin';
-import InlineImagePlugin from '../package/plugins/InlineImagePlugin';
-import AutoLinkPlugin from '../package/plugins/AutoLinkPlugin';
-import MarkdownShortcutPlugin from '../package/plugins/MarkdownShortcutPlugin';
-import ComponentPickerPlugin from '../package/plugins/ComponentPickerPlugin';
-import DragDropPaste from '../package/plugins/DragDropPastePlugin';
-import EmojiPickerPlugin from '../package/plugins/EmojiPickerPlugin';
-import EmojisPlugin from '../package/plugins/EmojisPlugin';
-import EquationsPlugin from '../package/plugins/EquationsPlugin';
-import CollapsiblePlugin from '../package/plugins/CollapsiblePlugin';
-import PageBreakPlugin from '../package/plugins/PageBreakPlugin';
-import { LayoutPlugin } from '../package/plugins/LayoutPlugin/LayoutPlugin';
-import YouTubePlugin from '../package/plugins/YouTubePlugin';
-import TwitterPlugin from '../package/plugins/TwitterPlugin';
-import FigmaPlugin from '../package/plugins/FigmaPlugin';
-import PollPlugin from '../package/plugins/PollPlugin';
-import TableCellResizer from '../package/plugins/TableCellResizer';
-import ExcalidrawPlugin from '../package/plugins/ExcalidrawPlugin';
-import CodeLineNumbersPlugin from '../package/plugins/CodeLineNumbersPlugin';
-import CodeActionMenuPlugin from '../package/plugins/CodeActionMenuPlugin';
-import AutoEmbedPlugin from '../package/plugins/AutoEmbedPlugin';
-import { TableContext } from '../package/plugins/TablePlugin';
-import { ToolbarContext } from '../package/context/ToolbarContext';
-import { SharedHistoryContext, useSharedHistoryContext } from '../package/context/SharedHistoryContext';
+import PlaygroundNodes from '@/package/nodes/PlaygroundNodes';
+import PlaygroundEditorTheme from '@/package/themes/PlaygroundEditorTheme';
+import ContentEditable from '@/package/ui/ContentEditable';
+import ToolbarPlugin from '@/package/plugins/ToolbarPlugin';
+import CodeHighlightPlugin from '@/package/plugins/CodeHighlightPlugin';
+import LinkPlugin from '@/package/plugins/LinkPlugin';
+import FloatingLinkEditorPlugin from '@/package/plugins/FloatingLinkEditorPlugin';
+import FloatingTextFormatToolbarPlugin from '@/package/plugins/FloatingTextFormatToolbarPlugin';
+import ImagesPlugin from '@/package/plugins/ImagesPlugin';
+import InlineImagePlugin from '@/package/plugins/InlineImagePlugin';
+import AutoLinkPlugin from '@/package/plugins/AutoLinkPlugin';
+import MarkdownShortcutPlugin from '@/package/plugins/MarkdownShortcutPlugin';
+import ComponentPickerPlugin from '@/package/plugins/ComponentPickerPlugin';
+import DragDropPaste from '@/package/plugins/DragDropPastePlugin';
+import EmojiPickerPlugin from '@/package/plugins/EmojiPickerPlugin';
+import EmojisPlugin from '@/package/plugins/EmojisPlugin';
+import EquationsPlugin from '@/package/plugins/EquationsPlugin';
+import CollapsiblePlugin from '@/package/plugins/CollapsiblePlugin';
+import PageBreakPlugin from '@/package/plugins/PageBreakPlugin';
+import { LayoutPlugin } from '@/package/plugins/LayoutPlugin/LayoutPlugin';
+import YouTubePlugin from '@/package/plugins/YouTubePlugin';
+import TwitterPlugin from '@/package/plugins/TwitterPlugin';
+import FigmaPlugin from '@/package/plugins/FigmaPlugin';
+import PollPlugin from '@/package/plugins/PollPlugin';
+import TableCellResizer from '@/package/plugins/TableCellResizer';
+import ExcalidrawPlugin from '@/package/plugins/ExcalidrawPlugin';
+import CodeLineNumbersPlugin from '@/package/plugins/CodeLineNumbersPlugin';
+import CodeActionMenuPlugin from '@/package/plugins/CodeActionMenuPlugin';
+import AutoEmbedPlugin from '@/package/plugins/AutoEmbedPlugin';
+import { TableContext } from '@/package/plugins/TablePlugin';
+import { ToolbarContext } from '@/package/context/ToolbarContext';
+import { SharedHistoryContext, useSharedHistoryContext } from '@/package/context/SharedHistoryContext';
 
 function SetInitialContentPlugin({ content }: { content: string }) {
   const [editor] = useLexicalComposerContext();
@@ -108,7 +108,7 @@ function EditorInner({
         setActiveEditor={setActiveEditor}
         setIsLinkEditMode={setIsLinkEditMode}
       />
-      <div className="editor-container">
+      <div className="editor-container dark-editor">
         <DragDropPaste />
         <AutoFocusPlugin />
         <ClearEditorPlugin />
@@ -180,7 +180,7 @@ export default function AdminEditor({
   onChange: (content: string) => void;
 }) {
   const initialConfig = {
-    namespace: 'CoreBlockAdmin',
+    namespace: 'SolveMPireAdmin',
     nodes: [...PlaygroundNodes],
     editable: true,
     onError: (error: Error) => {
@@ -190,16 +190,16 @@ export default function AdminEditor({
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm">
-      <div className="px-6 py-4 border-b border-slate-100">
-        <h2 className="text-xl font-bold text-navy-900">Content Editor</h2>
-        <p className="text-sm text-navy-500 mt-0.5">Use the rich text editor below to write your blog post</p>
+    <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-3xl overflow-hidden shadow-2xl">
+      <div className="px-6 py-5 border-b border-white/[0.06] bg-white/[0.02]">
+        <h2 className="text-xl font-bold text-text-light tracking-tight">Content Editor</h2>
+        <p className="text-xs text-text-light/40 mt-1 uppercase tracking-widest font-medium">SolveMPire Official Blog Management</p>
       </div>
       <LexicalComposer initialConfig={initialConfig}>
         <SharedHistoryContext>
           <TableContext>
             <ToolbarContext>
-              <div className="editor-shell">
+              <div className="editor-shell dark-shell">
                 <EditorInner initialContent={initialContent} onChange={onChange} />
               </div>
             </ToolbarContext>

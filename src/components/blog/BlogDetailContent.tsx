@@ -14,12 +14,12 @@ const ReadOnlyEditor = dynamic(() => import('@/components/blog/ReadOnlyEditor'),
     ssr: false,
     loading: () => (
         <div className="animate-pulse space-y-6 py-12 max-w-3xl mx-auto">
-            <div className="h-6 bg-zinc-100 rounded w-full"></div>
-            <div className="h-6 bg-zinc-100 rounded w-5/6"></div>
-            <div className="h-6 bg-zinc-100 rounded w-4/5"></div>
-            <div className="h-6 bg-zinc-100 rounded w-full"></div>
-            <div className="h-6 bg-zinc-100 rounded w-2/3"></div>
-            <div className="h-32 bg-zinc-100 rounded w-full my-8"></div>
+            <div className="h-6 bg-white/5 rounded w-full"></div>
+            <div className="h-6 bg-white/5 rounded w-5/6"></div>
+            <div className="h-6 bg-white/5 rounded w-4/5"></div>
+            <div className="h-6 bg-white/5 rounded w-full"></div>
+            <div className="h-6 bg-white/5 rounded w-2/3"></div>
+            <div className="h-32 bg-white/5 rounded w-full my-8"></div>
         </div>
     ),
 });
@@ -46,13 +46,11 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
     const [isLikeLoading, setIsLikeLoading] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
 
-    // Sync post if initialPost changes (rare for dynamic routes but good practice)
     useEffect(() => {
         setPost(initialPost);
         setLikeCount(initialPost.likes || 0);
     }, [initialPost]);
 
-    // Check Like Status
     useEffect(() => {
         async function checkLikeStatus() {
             if (!user || !post.id) {
@@ -70,7 +68,6 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
         checkLikeStatus();
     }, [params.slug, user]);
 
-    // Fetch Sidebar Posts
     useEffect(() => {
         async function fetchSidebarPosts() {
             setSidebarLoading(true);
@@ -102,7 +99,6 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
             const action = isLiked ? 'unlike' : 'like';
             const previousIsLiked = isLiked;
 
-            // Optimistic update
             setIsLiked(!isLiked);
             setLikeCount(prev => action === 'like' ? prev + 1 : Math.max(0, prev - 1));
 
@@ -119,7 +115,6 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
                 await updateDoc(blogRef, { likes: increment(1) });
             } else {
                 await deleteDoc(likeRef);
-                // Prevent negative likes
                 const blogSnap = await getDoc(blogRef);
                 if (blogSnap.exists()) {
                     const currentLikes = blogSnap.data().likes || 0;
@@ -128,8 +123,7 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
             }
         } catch (err) {
             console.error('Failed to toggle like:', err);
-            // Revert on failure
-            setIsLiked(isLiked ? false : true); // original state
+            setIsLiked(isLiked ? false : true);
             setLikeCount(post.likes || 0);
         } finally {
             setIsLikeLoading(false);
@@ -141,21 +135,21 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
     });
 
     return (
-        <div className="bg-white min-h-screen">
+        <div className="bg-bg-dark min-h-screen">
             <div className="w-full mx-auto px-4 sm:px-8 lg:px-12 py-10 lg:py-20 lg:grid lg:grid-cols-12 lg:gap-10">
 
-                {/* Sidebar - Hidden on mobile */}
+                {/* Sidebar */}
                 <aside className="hidden lg:block lg:col-span-3">
                     <div className="sticky top-28 space-y-8">
-                        <div className="flex flex-col h-[600px] border border-zinc-200 rounded-2xl bg-zinc-50/30 overflow-hidden shadow-sm">
-                            <div className="p-6 border-b border-zinc-200 bg-white">
-                                <h2 className="text-xs font-bold text-zinc-400 uppercase tracking-[0.2em]">Latest Articles</h2>
+                        <div className="flex flex-col h-[600px] border border-white/[0.06] rounded-2xl bg-white/[0.02] overflow-hidden">
+                            <div className="p-6 border-b border-white/[0.06]">
+                                <h2 className="text-xs font-bold text-accent uppercase tracking-[0.2em]">Latest Articles</h2>
                             </div>
 
                             <div className="flex-1 overflow-y-auto p-4 space-y-3">
                                 {sidebarLoading ? (
                                     [...Array(6)].map((_, i) => (
-                                        <div key={i} className="h-14 bg-zinc-100 animate-pulse rounded-xl"></div>
+                                        <div key={i} className="h-14 bg-white/5 animate-pulse rounded-xl"></div>
                                     ))
                                 ) : (
                                     sidebarPosts.map((sPost) => (
@@ -163,8 +157,8 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
                                             key={sPost.id}
                                             href={`/blog/${sPost.slug}${sidebarPage > 1 ? `?page=${sidebarPage}` : ''}`}
                                             className={`block p-4 rounded-xl transition-all border ${sPost.slug === params.slug
-                                                ? 'bg-zinc-950 border-zinc-950 text-white shadow-md'
-                                                : 'bg-white border-zinc-200 text-zinc-900 hover:border-zinc-300 hover:shadow-sm'
+                                                ? 'bg-primary border-primary text-white shadow-md shadow-primary/20'
+                                                : 'bg-white/[0.02] border-white/[0.06] text-text-light/70 hover:border-white/[0.12] hover:bg-white/[0.04]'
                                                 }`}
                                         >
                                             <h3 className="text-sm font-bold uppercase tracking-tight line-clamp-2 leading-snug">
@@ -176,12 +170,12 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
                             </div>
 
                             {/* Sidebar Pagination */}
-                            <div className="p-4 border-t border-zinc-200 bg-white flex items-center justify-between">
+                            <div className="p-4 border-t border-white/[0.06] flex items-center justify-between">
                                 <div className="flex items-center gap-1">
                                     <button
                                         onClick={() => setSidebarPage(prev => Math.max(1, prev - 1))}
                                         disabled={sidebarPage === 1 || sidebarLoading}
-                                        className="p-1.5 rounded-lg border border-zinc-200 text-zinc-600 hover:bg-zinc-50 disabled:opacity-30 transition-colors"
+                                        className="p-1.5 rounded-lg border border-white/[0.08] text-text-light/50 hover:bg-white/5 disabled:opacity-30 transition-colors"
                                     >
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
                                     </button>
@@ -190,15 +184,15 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
                                         {[...Array(sidebarTotalPages)].map((_, i) => {
                                             const p = i + 1;
                                             if (p > 3 && p < sidebarTotalPages) return null;
-                                            if (p === 3 && sidebarTotalPages > 4) return <span key="dots" className="text-zinc-300">.</span>;
+                                            if (p === 3 && sidebarTotalPages > 4) return <span key="dots" className="text-text-light/20">.</span>;
 
                                             return (
                                                 <button
                                                     key={p}
                                                     onClick={() => setSidebarPage(p)}
                                                     className={`w-8 h-8 rounded-lg text-xs font-bold transition-all border ${sidebarPage === p
-                                                        ? 'bg-zinc-950 border-zinc-950 text-white'
-                                                        : 'bg-white border-zinc-200 text-zinc-500 hover:border-zinc-300'
+                                                        ? 'bg-primary border-primary text-white'
+                                                        : 'bg-white/[0.02] border-white/[0.06] text-text-light/40 hover:border-white/[0.12]'
                                                         }`}
                                                 >
                                                     {p}
@@ -210,7 +204,7 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
                                     <button
                                         onClick={() => setSidebarPage(prev => Math.min(sidebarTotalPages, prev + 1))}
                                         disabled={sidebarPage === sidebarTotalPages || sidebarLoading}
-                                        className="p-1.5 rounded-lg border border-zinc-200 text-zinc-600 hover:bg-zinc-50 disabled:opacity-30 transition-colors"
+                                        className="p-1.5 rounded-lg border border-white/[0.08] text-text-light/50 hover:bg-white/5 disabled:opacity-30 transition-colors"
                                     >
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
                                     </button>
@@ -218,7 +212,7 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
                             </div>
                         </div>
 
-                        <Link href="/blog" className="flex items-center gap-2 text-xs font-bold text-zinc-400 uppercase tracking-widest hover:text-zinc-950 transition-colors">
+                        <Link href="/blog" className="flex items-center gap-2 text-xs font-bold text-text-light/30 uppercase tracking-widest hover:text-secondary transition-colors">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7 7-7m8 14l-7-7 7-7" /></svg>
                             View Full Archive
                         </Link>
@@ -227,25 +221,17 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
 
                 {/* Main Content Area */}
                 <article className="lg:col-span-9 animate-fade-in w-full">
-                    {/* Header & Hero */}
+                    {/* Header & Hero Image */}
                     {post.coverImage ? (
                         <header className="mb-5 w-full">
-                            <div className="relative rounded-3xl overflow-hidden bg-zinc-900 aspect-[21/9] border border-zinc-200/50 shadow-sm group w-full min-w-full">
+                            <div className="relative rounded-3xl overflow-hidden bg-tertiary aspect-[21/9] border border-white/[0.06] shadow-sm group w-full min-w-full">
                                 <img src={post.coverImage} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" alt={post.title} />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                                {/* post title hidden */}
-                                {/*<div className="absolute inset-0 p-8 sm:p-12 flex flex-col justify-end">
-                                    <div className="max-w-4xl">
-                                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-regular text-white tracking-tight leading-tight drop-shadow-md">
-                                            {post.title}
-                                        </h1>
-                                    </div>
-                                </div>*/}
+                                <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/80 via-bg-dark/20 to-transparent" />
                             </div>
                         </header>
                     ) : (
                         <header className="mb-14 max-w-4xl">
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-zinc-950 tracking-tight leading-tight">
+                            <h1 className="font-bebas text-4xl md:text-5xl lg:text-6xl text-text-light tracking-tight leading-tight">
                                 {post.title}
                             </h1>
                         </header>
@@ -253,7 +239,7 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
 
                     {/* Intro Text */}
                     {post.excerpt && (
-                        <p className="text-xl md:text-2xl text-zinc-600 leading-relaxed font-normal mb-4 border-l-4 border-zinc-950 pl-8 max-w-4xl">
+                        <p className="text-xl md:text-2xl text-text-light/55 leading-relaxed font-normal mb-4 border-l-4 border-primary pl-8 max-w-4xl">
                             {post.excerpt}
                         </p>
                     )}
@@ -263,39 +249,39 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
                         {post.content ? (
                             <ReadOnlyEditor content={post.content} />
                         ) : (
-                            <div className="py-20 text-center bg-zinc-50 rounded-3xl border border-dashed border-zinc-200">
-                                <p className="text-zinc-500 text-lg">This article has no content yet.</p>
+                            <div className="py-20 text-center bg-white/[0.02] rounded-3xl border border-dashed border-white/[0.06]">
+                                <p className="text-text-light/40 text-lg">This article has no content yet.</p>
                             </div>
                         )}
                     </div>
 
                     {/* Footer Metadata */}
-                    <footer className="pt-12 border-t border-zinc-100 space-y-12 max-w-4xl">
+                    <footer className="pt-12 border-t border-white/[0.06] space-y-12 max-w-4xl">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-8">
                             <div className="flex items-center gap-5">
-                                <div className="w-14 h-14 rounded-full bg-zinc-950 text-white flex items-center justify-center font-bold text-xl shadow-lg ring-4 ring-zinc-50">
+                                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-primary text-white flex items-center justify-center font-bold text-xl shadow-lg">
                                     {post.author.charAt(0)}
                                 </div>
                                 <div>
-                                    <p className="text-lg font-bold text-zinc-950 leading-tight">{post.author}</p>
-                                    <div className="flex items-center gap-3 text-sm text-zinc-500 mt-1.5 font-medium">
+                                    <p className="text-lg font-bold text-text-light leading-tight">{post.author}</p>
+                                    <div className="flex items-center gap-3 text-sm text-text-light/40 mt-1.5 font-medium">
                                         <time dateTime={new Date(post.publishedAt || post.createdAt).toISOString()}>{publishDate}</time>
-                                        <span className="w-1.5 h-1.5 rounded-full bg-zinc-200" />
+                                        <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
                                         <span>{post.readTime} min read</span>
-                                        <span className="w-1.5 h-1.5 rounded-full bg-zinc-200" />
-                                        <span className="text-zinc-950 font-bold">{post.category}</span>
+                                        <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
+                                        <span className="text-secondary font-bold">{post.category}</span>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Like Component */}
-                            <div className="flex items-center gap-4 bg-zinc-50 px-6 py-3 rounded-2xl border border-zinc-200/60 self-start sm:self-center">
+                            <div className="flex items-center gap-4 bg-white/[0.03] px-6 py-3 rounded-2xl border border-white/[0.06] self-start sm:self-center">
                                 <button
                                     onClick={handleToggleLike}
                                     disabled={isLikeLoading}
                                     className={`group flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 border shadow-sm ${isLiked
-                                        ? 'bg-rose-500 border-rose-500 text-white shadow-rose-200'
-                                        : 'bg-white border-zinc-200 text-zinc-400 hover:border-zinc-300'
+                                        ? 'bg-rose-500 border-rose-500 text-white shadow-rose-500/20'
+                                        : 'bg-white/5 border-white/[0.08] text-text-light/40 hover:border-white/15'
                                         }`}
                                 >
                                     <svg className={`w-6 h-6 ${isLiked ? 'fill-current' : 'fill-none'} transition-transform group-hover:scale-110`} viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -303,8 +289,8 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
                                     </svg>
                                 </button>
                                 <div className="flex flex-col">
-                                    <span className="text-lg font-bold text-zinc-950 leading-none">{likeCount}</span>
-                                    <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest mt-1">Appreciation</span>
+                                    <span className="text-lg font-bold text-text-light leading-none">{likeCount}</span>
+                                    <span className="text-xs font-bold text-text-light/30 uppercase tracking-widest mt-1">Appreciation</span>
                                 </div>
                             </div>
                         </div>
@@ -313,7 +299,7 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
                         {post.tags && post.tags.length > 0 && (
                             <div className="flex flex-wrap gap-2.5">
                                 {post.tags.map(tag => (
-                                    <span key={tag} className="px-4 py-2 bg-zinc-100 text-zinc-600 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-colors cursor-default">
+                                    <span key={tag} className="px-4 py-2 bg-white/[0.04] text-text-light/50 rounded-xl text-xs font-bold uppercase tracking-wider border border-white/[0.06] hover:bg-white/[0.08] transition-colors cursor-default">
                                         {tag}
                                     </span>
                                 ))}
@@ -327,7 +313,7 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
                 isOpen={showLoginModal}
                 onClose={() => setShowLoginModal(false)}
                 title="Sign in to Like"
-                subtitle="Join CoreBlock to save and like your favorite articles."
+                subtitle="Join SolveMPire to save and like your favorite articles."
             />
         </div>
     );

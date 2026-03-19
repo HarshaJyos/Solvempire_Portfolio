@@ -368,7 +368,7 @@ export default function PollComponent({
         <div className="flex justify-between items-center mb-4">
           <h2 className="PollNode__heading">{question}</h2>
           {isExpired && (
-            <span className="text-xs font-bold text-red-500 uppercase tracking-wider px-2 py-1 bg-red-50 rounded">
+            <span className="text-[10px] font-bold text-rose-500 uppercase tracking-[0.15em] px-2.5 py-1 bg-rose-500/10 border border-rose-500/20 rounded-lg">
               Closed
             </span>
           )}
@@ -397,13 +397,13 @@ export default function PollComponent({
               Add Option
             </Button>
           ) : (
-            <div className="text-xs text-zinc-500 italic">
+            <div className="text-[11px] font-medium text-text-light/30 uppercase tracking-widest mt-4">
               {totalVotes} total votes • {isExpired ? 'Poll ended' : 'Voting ends after 24 hours'}
             </div>
           )}
         </div>
       </div>
-      <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} title="Sign in to Vote" subtitle="Join the CoreBlock community to participate in community polls." />
+      <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} title="Sign in to Vote" subtitle="Join SolveMPire to participate in community polls." />
     </div>
   );
 }

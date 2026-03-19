@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import HomeContent from '@/components/HomeContent';
+import HomeContent from '@/components/blog/HomeContent';
 import { db } from '@/lib/firebase';
 import { collection, getDocs, query, doc, getDoc } from 'firebase/firestore';
 import type { BlogPost } from '@/types/blog';
@@ -7,17 +7,17 @@ import type { BlogPost } from '@/types/blog';
 export const revalidate = 60; // Revalidate page every 60 seconds
 
 export const metadata: Metadata = {
-  title: "CoreBlock — Writing about Code, Design, and AI",
+  title: "SolveMPire — Writing about Code, Design, and AI",
   description: "An open journal by Hanish Jyosyabhatla exploring software engineering, AI, and digital craftsmanship in his own words.",
   openGraph: {
-    title: "CoreBlock — AI & Tech Journal by Hanish Jyosyabhatla",
-    description: "Insights into AI, Agents, and modern development by Hanish Jyosyabhatla.",
+     title: "SolveMPire — AI, Agents & Tech by Hanish Jyosyabhatla",
+     description: "Insights into AI, Agents, and modern engineering by Hanish Jyosyabhatla.",
+     siteName: "SolveMPire",
   }
 };
 
 async function getInitialPosts() {
   try {
-    // Note: Simple query to avoid complex indexes for now, sorting in memory
     const q = query(collection(db, 'blogs'));
     const snapshot = await getDocs(q);
 
@@ -26,9 +26,12 @@ async function getInitialPosts() {
       ...doc.data()
     })) as BlogPost[];
 
-    // Filter and Sort like the API does
     blogs = blogs.filter(b => b.status === 'published');
-    blogs.sort((a, b) => (b.publishedAt || b.createdAt) - (a.publishedAt || a.createdAt));
+    blogs.sort((a, b) => {
+        const dateA = a.publishedAt || a.createdAt || 0;
+        const dateB = b.publishedAt || b.createdAt || 0;
+        return dateB - dateA;
+    });
 
     let featuredPost: BlogPost | null = null;
     try {

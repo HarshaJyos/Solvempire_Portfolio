@@ -25,7 +25,7 @@ export default function ReadOnlyEditor({ content }: { content: string }) {
     }
   };
   const initialConfig = {
-    namespace: 'CoreBlockReader',
+    namespace: 'SolveMPireReader',
     nodes: [...PlaygroundNodes],
     editable: false,
     editorState: content || undefined,
