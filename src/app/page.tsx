@@ -1,5 +1,5 @@
 import Hero from "@/components/Hero";
-import Founder from "@/components/Founder";
+import Team from "@/components/Team";
 import MissionVision from "@/components/MissionVision";
 import CtaBanner from "@/components/CtaBanner";
 import About from "@/components/About";
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Founder />
+      <Team />
       <MissionVision />
       <CtaBanner />
       <About />
