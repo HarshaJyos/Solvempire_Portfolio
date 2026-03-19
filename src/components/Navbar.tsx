@@ -4,10 +4,9 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const navLinks = [
-  { label: "About", href: "#about" },
+  { label: "About", href: "#founder" },
   { label: "Services", href: "#services" },
   { label: "Projects", href: "#projects" },
-  { label: "Partners", href: "#partners" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -25,7 +24,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/90 backdrop-blur-xl shadow-[0_1px_20px_rgba(33,72,186,0.08)]"
+          ? "bg-bg-dark/90 backdrop-blur-xl shadow-[0_1px_20px_rgba(33,72,186,0.12)]"
           : "bg-transparent"
       }`}
     >
@@ -34,7 +33,7 @@ export default function Navbar() {
         <a href="#" className="flex items-center gap-3 group">
           <Image
             src="/logo.png"
-            alt="SolvEmpire"
+            alt="SolvMPire"
             width={160}
             height={40}
             className="h-9 w-auto object-contain"
@@ -48,7 +47,7 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="relative px-4 py-2 text-[15px] font-medium text-dark/80 hover:text-primary transition-colors duration-200 rounded-lg hover:bg-primary/5"
+                className="relative px-4 py-2 text-[15px] font-medium text-text-light/70 hover:text-text-light transition-colors duration-200 rounded-lg hover:bg-white/5"
               >
                 {link.label}
               </a>
@@ -57,9 +56,9 @@ export default function Navbar() {
           <li className="ml-4">
             <a
               href="#contact"
-              className="inline-flex items-center px-5 py-2.5 text-[14px] font-semibold text-white bg-primary rounded-full hover:bg-primary/90 transition-all duration-200 hover:shadow-[0_4px_20px_rgba(33,72,186,0.35)]"
+              className="inline-flex items-center px-5 py-2.5 text-[14px] font-semibold text-white bg-primary rounded-full hover:bg-secondary transition-all duration-200 hover:shadow-[0_4px_20px_rgba(33,72,186,0.45)]"
             >
-              Get in Touch
+              Bring Us Your Problem
             </a>
           </li>
         </ul>
@@ -71,17 +70,17 @@ export default function Navbar() {
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-6 h-[2px] bg-dark transition-all duration-300 ${
+            className={`block w-6 h-[2px] bg-text-light transition-all duration-300 ${
               mobileOpen ? "rotate-45 translate-y-[7px]" : ""
             }`}
           />
           <span
-            className={`block w-6 h-[2px] bg-dark transition-all duration-300 ${
+            className={`block w-6 h-[2px] bg-text-light transition-all duration-300 ${
               mobileOpen ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`block w-6 h-[2px] bg-dark transition-all duration-300 ${
+            className={`block w-6 h-[2px] bg-text-light transition-all duration-300 ${
               mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""
             }`}
           />
@@ -90,8 +89,8 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 bg-white/95 backdrop-blur-xl ${
-          mobileOpen ? "max-h-[400px] border-t border-gray-100" : "max-h-0"
+        className={`md:hidden overflow-hidden transition-all duration-300 bg-bg-dark/95 backdrop-blur-xl ${
+          mobileOpen ? "max-h-[400px] border-t border-white/10" : "max-h-0"
         }`}
       >
         <ul className="flex flex-col px-6 py-4 gap-1">
@@ -100,7 +99,7 @@ export default function Navbar() {
               <a
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 text-[15px] font-medium text-dark/80 hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
+                className="block px-4 py-3 text-[15px] font-medium text-text-light/70 hover:text-text-light hover:bg-white/5 rounded-lg transition-colors"
               >
                 {link.label}
               </a>
@@ -110,9 +109,9 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={() => setMobileOpen(false)}
-              className="block text-center px-5 py-3 text-[14px] font-semibold text-white bg-primary rounded-full hover:bg-primary/90 transition-all"
+              className="block text-center px-5 py-3 text-[14px] font-semibold text-white bg-primary rounded-full hover:bg-secondary transition-all"
             >
-              Get in Touch
+              Bring Us Your Problem
             </a>
           </li>
         </ul>

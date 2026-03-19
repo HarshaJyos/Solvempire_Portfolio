@@ -4,26 +4,24 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "SolvEmpire Pvt Ltd — Software, Hardware & IT Solutions",
+  title: "SolvMPire — Bring Us a Problem. We'll Build the Solution.",
   description:
-    "SolvEmpire develops cutting-edge software, hardware, and IT solutions including web, mobile, cloud, AI/ML, data analytics, cybersecurity, IoT, and robotics.",
+    "SolvMPire doesn't sell services. We solve problems. From digital products and AI to IoT systems — tell us what's broken, we'll build what fixes it.",
   keywords: [
-    "SolvEmpire",
+    "SolvMPire",
+    "problem solving",
     "software development",
-    "IT solutions",
     "AI",
     "ML",
     "IoT",
-    "robotics",
-    "cybersecurity",
-    "cloud",
     "web development",
-    "mobile development",
+    "digital products",
+    "startup",
   ],
   openGraph: {
-    title: "SolvEmpire Pvt Ltd",
+    title: "SolvMPire — Bring Us a Problem. We'll Build the Solution.",
     description:
-      "Building the future, one solution at a time. Software, hardware, and IT solutions.",
+      "Most companies sell services. We solve problems. Tell us what's broken.",
     type: "website",
   },
 };
@@ -35,7 +33,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-helvetica antialiased">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="font-inter antialiased">
         <Navbar />
         <main>{children}</main>
         <Footer />
