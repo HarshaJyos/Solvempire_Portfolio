@@ -1,0 +1,71 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Admin check helper
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'adminsolvempirehtl@ikyk.com';
+    }
+
+    // Blogs collection
+    match /blogs/{blogId} {
+      // Anyone can read (to support API routes acting as anonymous clients)
+      allow read: if true;
+      allow create, delete: if isAdmin();
+      // Regular authenticated users can only update the 'likes' field
+      allow update: if isAdmin() || (
+        request.auth != null &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likes'])
+      );
+      
+      // Likes subcollection
+      match /likes/{userId} {
+        allow read: if true;
+        // Users can only manage their own likes
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+    
+    // Newsletter collection
+    match /newsletter/{entryId} {
+      // Anyone can check if subscribed (get) or subscribe (create)
+      allow get, create: if true;
+      // Only authenticated users (admins) can list or manage
+      allow list, update, delete: if isAdmin();
+    }
+    
+    // Polls collection
+    match /polls/{pollId} {
+      // Anyone can view poll results
+      allow read: if true;
+      allow create, delete: if isAdmin();
+      // Authenticated users can vote by incrementing vote counts
+      allow update: if isAdmin() || (
+        request.auth != null &&
+        request.resource.data.diff(resource.data).affectedKeys().hasAny(['totalVotes', 'options', 'lastVoteAt'])
+      );
+      
+      // Votes subcollection
+      match /votes/{userId} {
+        // Users can only vote themselves
+        allow create, update: if request.auth != null && request.auth.uid == userId;
+        // Anyone can check if they've voted
+        allow get: if true;
+        allow list: if isAdmin();
+      }
+    }
+    
+    // Featured collection (for the featured blog post ID)
+    match /featured/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // Security fallback
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
