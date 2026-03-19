@@ -7,11 +7,9 @@
  */
 
 export function setDomHiddenUntilFound(dom: HTMLElement): void {
-  // @ts-expect-error
-  dom.hidden = 'until-found';
+  dom.hidden = 'until-found' as any;
 }
 
 export function domOnBeforeMatch(dom: HTMLElement, callback: () => void): void {
-  // @ts-expect-error
-  dom.onbeforematch = callback;
+  (dom as any).onbeforematch = callback;
 }
