@@ -31,7 +31,7 @@ export default function Contact() {
     // 1. Rate Limiting Check (1 minute)
     const lastSubmission = localStorage.getItem("last_contact_submission");
     const now = Date.now();
-    
+
     if (lastSubmission && now - parseInt(lastSubmission) < 60000) {
       setStatus("rate-limited");
       setTimeout(() => setStatus("idle"), 5000);
@@ -53,7 +53,7 @@ export default function Contact() {
       const params = new URLSearchParams();
       Object.entries(data).forEach(([key, value]) => params.append(key, value));
 
-      const response = await fetch("https://script.google.com/macros/s/AKfycbyVl2xejbVnOBiPmDB924Bk2wegTYZ5ausYQx8-7EWeFTfHEIaxw7sOFEv5GkPYRFA/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbw9mYVKp4xnUowaSVyYcW8hQIC1LVRSVGWyl7ARSc7FsnNwd5r4YgWakrq725m-rTc/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -61,20 +61,30 @@ export default function Contact() {
         body: params.toString(),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
+      // Google Apps Script usually returns a redirect (302) which fetch follows.
+      // If CORS is not handled by the script, fetch might throw an error here.
+      // We will try to parse the JSON if possible.
       const result = await response.json();
-      
-      if (result.status !== "success") {
+
+      if (result.status === "success" || result.status === "rate_limited" || result.status === "invalid") {
+        if (result.status === "success") {
+          setStatus("success");
+          localStorage.setItem("last_contact_submission", now.toString());
+          (e.target as HTMLFormElement).reset();
+        } else if (result.status === "rate_limited") {
+          setStatus("rate-limited");
+        } else {
+          setStatus("error");
+          setErrorMsg("Invalid data. Please check your fields.");
+        }
+      } else {
         throw new Error(result.status || "Unknown error");
       }
-      
+
       setStatus("success");
       localStorage.setItem("last_contact_submission", now.toString());
       (e.target as HTMLFormElement).reset();
-      
+
       setTimeout(() => setStatus("idle"), 5000);
     } catch (err) {
       console.error("Submission error:", err);
@@ -239,13 +249,13 @@ export default function Contact() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full py-3.5 text-[14px] font-semibold text-white rounded-xl transition-all duration-300 flex items-center justify-center gap-2
-                      ${status === "success" 
-                        ? "bg-green-600 shadow-[0_4px_20px_rgba(22,163,74,0.3)]" 
-                        : status === "error" 
-                        ? "bg-red-600 shadow-[0_4px_20px_rgba(220,38,38,0.3)]"
-                        : status === "rate-limited"
-                        ? "bg-amber-600 shadow-[0_4px_20px_rgba(217,119,6,0.3)]"
-                        : "bg-primary hover:bg-secondary hover:shadow-[0_4px_25px_rgba(33,72,186,0.4)]"
+                      ${status === "success"
+                        ? "bg-green-600 shadow-[0_4px_20px_rgba(22,163,74,0.3)]"
+                        : status === "error"
+                          ? "bg-red-600 shadow-[0_4px_20px_rgba(220,38,38,0.3)]"
+                          : status === "rate-limited"
+                            ? "bg-amber-600 shadow-[0_4px_20px_rgba(217,119,6,0.3)]"
+                            : "bg-primary hover:bg-secondary hover:shadow-[0_4px_25px_rgba(33,72,186,0.4)]"
                       }
                       ${status === "loading" ? "opacity-70 cursor-wait" : ""}
                     `}
@@ -262,7 +272,7 @@ export default function Contact() {
                     {status === "error" && "✕ Try Again"}
                     {status === "rate-limited" && "⌚ One message per minute"}
                   </button>
-                  
+
                   {status === "error" && (
                     <p className="mt-3 text-[12px] text-red-500 text-center animate-fade-in">
                       {errorMsg}
