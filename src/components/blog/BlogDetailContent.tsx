@@ -221,7 +221,7 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
 
                 {/* Main Content Area */}
                 <article className="lg:col-span-9 animate-fade-in w-full">
-                    {/* Header & Hero Image */}
+                    {/* Header & Hero Image 
                     {post.coverImage ? (
                         <header className="mb-5 w-full">
                             <div className="relative rounded-3xl overflow-hidden bg-tertiary aspect-[21/9] border border-white/[0.06] shadow-sm group w-full min-w-full">
@@ -229,17 +229,17 @@ export default function BlogDetailContent({ initialPost }: BlogDetailContentProp
                                 <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/80 via-bg-dark/20 to-transparent" />
                             </div>
                         </header>
-                    ) : (
-                        <header className="mb-14 max-w-4xl">
-                            <h1 className="font-bebas text-4xl md:text-5xl lg:text-6xl text-text-light tracking-tight leading-tight">
-                                {post.title}
-                            </h1>
-                        </header>
-                    )}
+                    ) : (*/}
+                    <header className="mt-8 mb-2 max-w-4xl">
+                        <h1 className="font-bebas text-4xl md:text-5xl lg:text-6xl text-text-light tracking-tight leading-tight">
+                            {post.title}
+                        </h1>
+                    </header>
+                    {/* )} */}
 
                     {/* Intro Text */}
                     {post.excerpt && (
-                        <p className="text-xl md:text-2xl text-text-light/55 leading-relaxed font-normal mb-4 border-l-4 border-primary pl-8 max-w-4xl">
+                        <p className="text-md md:text-md text-text-light/55 leading-relaxed font-normal mb-4 border-l-4 border-primary pl-8 max-w-4xl">
                             {post.excerpt}
                         </p>
                     )}
