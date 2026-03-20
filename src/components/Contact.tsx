@@ -21,12 +21,67 @@ function useInView(ref: React.RefObject<HTMLElement | null>) {
 export default function Contact() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref);
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "rate-limited">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setErrorMsg("");
+
+    // 1. Rate Limiting Check (1 minute)
+    const lastSubmission = localStorage.getItem("last_contact_submission");
+    const now = Date.now();
+    
+    if (lastSubmission && now - parseInt(lastSubmission) < 60000) {
+      setStatus("rate-limited");
+      setTimeout(() => setStatus("idle"), 5000);
+      return;
+    }
+
+    setStatus("loading");
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      site_key: "solvempire_secret_2026",
+      fullname: formData.get("fullname") as string,
+      emailaddress: formData.get("email") as string,
+      whatsbroken: formData.get("message") as string,
+    };
+
+    try {
+      // We use URLSearchParams for application/x-www-form-urlencoded which works best with Apps Script e.parameter
+      const params = new URLSearchParams();
+      Object.entries(data).forEach(([key, value]) => params.append(key, value));
+
+      const response = await fetch("https://script.google.com/macros/s/AKfycbyVl2xejbVnOBiPmDB924Bk2wegTYZ5ausYQx8-7EWeFTfHEIaxw7sOFEv5GkPYRFA/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: params.toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const result = await response.json();
+      
+      if (result.status !== "success") {
+        throw new Error(result.status || "Unknown error");
+      }
+      
+      setStatus("success");
+      localStorage.setItem("last_contact_submission", now.toString());
+      (e.target as HTMLFormElement).reset();
+      
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch (err) {
+      console.error("Submission error:", err);
+      setStatus("error");
+      setErrorMsg("Something went wrong. Please try again or email us directly.");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
   };
 
   return (
@@ -130,13 +185,14 @@ export default function Contact() {
               <div className="space-y-5">
                 <div>
                   <label
-                    htmlFor="name"
+                    htmlFor="fullname"
                     className="block text-[13px] font-medium text-text-light/50 mb-2"
                   >
                     Full Name
                   </label>
                   <input
-                    id="name"
+                    id="fullname"
+                    name="fullname"
                     type="text"
                     required
                     className="w-full px-4 py-3 text-[14px] text-text-light bg-white/[0.04] rounded-xl border border-white/[0.08] outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/15 transition-all duration-200 placeholder:text-text-light/20"
@@ -153,6 +209,7 @@ export default function Contact() {
                   </label>
                   <input
                     id="email"
+                    name="email"
                     type="email"
                     required
                     className="w-full px-4 py-3 text-[14px] text-text-light bg-white/[0.04] rounded-xl border border-white/[0.08] outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/15 transition-all duration-200 placeholder:text-text-light/20"
@@ -169,6 +226,7 @@ export default function Contact() {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     required
                     rows={5}
                     className="w-full px-4 py-3 text-[14px] text-text-light bg-white/[0.04] rounded-xl border border-white/[0.08] outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/15 transition-all duration-200 resize-none placeholder:text-text-light/20"
@@ -176,12 +234,46 @@ export default function Contact() {
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className="w-full py-3.5 text-[14px] font-semibold text-white bg-primary rounded-xl hover:bg-secondary hover:shadow-[0_4px_25px_rgba(33,72,186,0.4)] transition-all duration-300"
-                >
-                  {submitted ? "✓ We'll be in touch!" : "Let's Build"}
-                </button>
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    disabled={status === "loading"}
+                    className={`w-full py-3.5 text-[14px] font-semibold text-white rounded-xl transition-all duration-300 flex items-center justify-center gap-2
+                      ${status === "success" 
+                        ? "bg-green-600 shadow-[0_4px_20px_rgba(22,163,74,0.3)]" 
+                        : status === "error" 
+                        ? "bg-red-600 shadow-[0_4px_20px_rgba(220,38,38,0.3)]"
+                        : status === "rate-limited"
+                        ? "bg-amber-600 shadow-[0_4px_20px_rgba(217,119,6,0.3)]"
+                        : "bg-primary hover:bg-secondary hover:shadow-[0_4px_25px_rgba(33,72,186,0.4)]"
+                      }
+                      ${status === "loading" ? "opacity-70 cursor-wait" : ""}
+                    `}
+                  >
+                    {status === "loading" && (
+                      <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                    )}
+                    {status === "idle" && "Let's Build"}
+                    {status === "loading" && "Sending..."}
+                    {status === "success" && "✓ Message Received!"}
+                    {status === "error" && "✕ Try Again"}
+                    {status === "rate-limited" && "⌚ One message per minute"}
+                  </button>
+                  
+                  {status === "error" && (
+                    <p className="mt-3 text-[12px] text-red-500 text-center animate-fade-in">
+                      {errorMsg}
+                    </p>
+                  )}
+                  {status === "rate-limited" && (
+                    <p className="mt-3 text-[12px] text-amber-500 text-center animate-fade-in">
+                      Slow down! You can send another message in a bit.
+                    </p>
+                  )}
+                </div>
               </div>
             </form>
           </div>
