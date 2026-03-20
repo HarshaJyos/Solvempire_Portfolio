@@ -43,12 +43,12 @@ export interface BlogPostFormData {
 }
 
 export const BLOG_CATEGORIES = [
-  'Technology',
-  'Design',
-  'Development',
-  'Business',
+  'Founder Notes',
+  'Building in Public',
+  'Software & AI',
+  'Hardware & IoT',
+  'Client Stories',
   'Marketing',
-  'Tutorial',
-  'News',
+  'Startup Life',
   'Opinion',
 ] as const;

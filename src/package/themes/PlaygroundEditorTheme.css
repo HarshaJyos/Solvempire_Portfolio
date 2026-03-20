@@ -33,14 +33,14 @@
 
 .PlaygroundEditorTheme__h1 {
   font-size: 24px;
-  color: rgb(5, 5, 5);
+  color: rgb(245, 158, 11);
   font-weight: 400;
   margin: 0;
 }
 
 .PlaygroundEditorTheme__h2 {
   font-size: 15px;
-  color: rgb(101, 103, 107);
+  color: rgb(245, 158, 11);
   font-weight: 700;
   margin: 0;
   text-transform: uppercase;
@@ -48,6 +48,7 @@
 
 .PlaygroundEditorTheme__h3 {
   font-size: 12px;
+  color: rgb(245, 158, 11);
   margin: 0;
   text-transform: uppercase;
 }
@@ -193,7 +194,7 @@
 }
 
 .PlaygroundEditorTheme__code {
-  background-color: rgb(240, 242, 245);
+  background-color: rgba(88, 144, 255, 0.15);
   font-family: Menlo, Consolas, Monaco, monospace;
   display: block;
   padding: 8px 8px 8px 52px;
@@ -210,12 +211,12 @@
 .PlaygroundEditorTheme__code:before {
   content: attr(data-gutter);
   position: absolute;
-  background-color: #eee;
+  background-color: rgb(206, 208, 212);
   left: 0;
   top: 0;
   border-right: 1px solid #ccc;
   padding: 8px;
-  color: #777;
+  color: rgb(60, 132, 244);
   white-space: pre-wrap;
   text-align: right;
   min-width: 25px;
