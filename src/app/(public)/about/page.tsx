@@ -2,10 +2,19 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'Our Mission & Team | SolveMPire',
-  description: 'SolveMPire exists to build what others only talk about. Meet the team of engineers architecting real solutions for real problems.',
+  title: 'About SolveMPire — Built by Builders, For Builders',
+  description: 'SolveMPire was founded during the final year of engineering with one belief: execution is rarer than intelligence. Learn who we are, what drives us, and why we build.',
+  keywords: [
+    'about solvempire',
+    'solvempire founder',
+    'tech company founded in college',
+    'engineering startup india',
+    'solvempire mission',
+    'solvempire vision',
+    'who is solvempire'
+  ],
   openGraph: {
-    title: 'Our Mission & Team | SolveMPire',
+    title: 'About SolveMPire — Built by Builders, For Builders',
     description: 'Explore the SolveMPire manifesto, our "Choose Yourself" philosophy, and the builders behind the brand.',
     url: 'https://solvempire.com/about',
     siteName: 'SolveMPire',

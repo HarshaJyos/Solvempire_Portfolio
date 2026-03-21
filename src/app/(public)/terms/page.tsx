@@ -3,6 +3,13 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Platform Agreement | Terms of Service | SolveMPire',
   description: 'The formal agreement governing the use of SolveMPire technical insights, journal content, and architectural patterns.',
+  keywords: [
+    'terms of service solvempire',
+    'user agreement',
+    'solvempire terms',
+    'platform protocol',
+    'legal agreement india'
+  ],
   openGraph: {
     title: 'Terms of Service | SolveMPire Platform',
     description: 'Guidelines for professional interaction and intellectual property governance on the SolveMPire platform.',

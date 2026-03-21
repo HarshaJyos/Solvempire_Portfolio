@@ -3,6 +3,13 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Data Governance & Privacy Policy | SolveMPire',
   description: 'Our commitment to data integrity and user privacy. Review the SolveMPire Data Governance standards and protection protocols.',
+  keywords: [
+    'privacy policy solvempire',
+    'data governance',
+    'user privacy',
+    'solvempire security',
+    'data protection india'
+  ],
   openGraph: {
     title: 'Privacy Policy | SolveMPire Platform',
     description: 'Learn how SolveMPire secures your identity and respects your data ownership within our engineering ecosystem.',

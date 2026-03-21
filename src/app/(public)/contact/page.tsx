@@ -1,11 +1,18 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact SolveMPire | Bring Us Your Problem',
-  description: 'Most companies sell services. We solve problems. Tell us what is broken, and the SolveMPire team will architect the solution.',
+  title: 'Contact SolveMPire — Bring Us Your Problem',
+  description: 'Have a real problem you\'re serious about solving? Get in touch with SolveMPire. We build software, AI systems, hardware, and digital strategies that work.',
+  keywords: [
+    'contact solvempire',
+    'hire solvempire',
+    'work with solvempire',
+    'tech company contact india',
+    'software development inquiry'
+  ],
   openGraph: {
-    title: 'Contact SolveMPire | Tell Us What is Broken',
-    description: 'Provide details on your engineering challenges, AI bottlenecks, or system failures. SolveMPire architects solutions.',
+    title: 'Contact SolveMPire — Bring Us Your Problem',
+    description: 'Have a real problem you\'re serious about solving? Get in touch with SolveMPire.',
     url: 'https://solvempire.com/contact',
     siteName: 'SolveMPire',
     type: 'website',

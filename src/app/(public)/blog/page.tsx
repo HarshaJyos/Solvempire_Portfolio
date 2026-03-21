@@ -8,11 +8,19 @@ import { Suspense } from 'react';
 export const revalidate = 60; // Revalidate page every 60 seconds
 
 export const metadata: Metadata = {
-  title: "SolveMPire — Writing about Code, Design, and AI",
-  description: "An open journal by Hanish Jyosyabhatla exploring software engineering, AI, and digital craftsmanship in his own words.",
+  title: "Field Notes — SolveMPire Blog | Building in Public",
+  description: "Honest writing from inside a company being built in real time. Founder notes, client stories, technical insights, and sharp opinions from the team at SolveMPire.",
+  keywords: [
+    "solvempire blog",
+    "startup founder blog india",
+    "building in public",
+    "tech startup journey",
+    "engineering entrepreneur blog",
+    "software company blog india"
+  ],
   openGraph: {
-    title: "SolveMPire — AI, Agents & Tech by Hanish Jyosyabhatla",
-    description: "Insights into AI, Agents, and modern engineering by Hanish Jyosyabhatla.",
+    title: "Field Notes — SolveMPire Blog | Building in Public",
+    description: "Insights into AI, Agents, and modern engineering by the builders at SolveMPire.",
     siteName: "SolveMPire",
     url: "https://solvempire.com/blog",
   }
