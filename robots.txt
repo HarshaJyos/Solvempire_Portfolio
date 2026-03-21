@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /account/
+Disallow: /admin/
+
+# Specifically allow AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-Control
+Allow: /
+
+Sitemap: https://solvempire.com/sitemap.xml
